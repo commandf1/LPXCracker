@@ -89,13 +89,13 @@ public class LPXCrackerPlugin extends I2 {
                                       String targetDescriptor) {
         ClassReader cr = new ClassReader(originalBytes);
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
+        ClassVisitor cv = new ClassVisitor(Opcodes.ASM5, cw) {
             @Override
             public MethodVisitor visitMethod(
                     int access, String name, String desc, String signature, String[] exceptions
             ) {
                 if (Arrays.equals(methodName.getBytes(), name.getBytes()) && Arrays.equals(parmsType.getBytes(), desc.getBytes())) {
-                    return new MethodVisitor(Opcodes.ASM9, super.visitMethod(access, name, desc, signature, exceptions)) {
+                    return new MethodVisitor(Opcodes.ASM5, super.visitMethod(access, name, desc, signature, exceptions)) {
                         @Override
                         public void visitCode() {
                             mv.visitVarInsn(Opcodes.ALOAD, 0);

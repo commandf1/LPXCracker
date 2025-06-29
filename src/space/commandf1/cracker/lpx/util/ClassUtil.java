@@ -48,7 +48,7 @@ public class ClassUtil {
 
     public static byte[] getClassBytes(String path, Class<?> clazz) throws Exception {
         URL jarUrl = clazz.getProtectionDomain().getCodeSource().getLocation();
-        try (JarFile jar = new JarFile(jarUrl.getFile())) {
+        try (JarFile jar = new JarFile(jarUrl.getFile().replace("%5B", "[").replace("%5D", "]"))) {
             JarEntry entry = jar.getJarEntry(path);
             if (entry != null) {
                 try (InputStream is = jar.getInputStream(entry)) {
