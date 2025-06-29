@@ -7,5 +7,5 @@ If you are worried about the possibility of getting infected by backdoor, you ca
 
 1. download the crack from release page
 2. put it in the 'plugins' dir
-3. add a jvm arguments `--add-opens=java.base/java.lang=ALL-UNNAMED`
+3. add a jvm argument (if your java version is higher than 1.8) `--add-opens=java.base/java.lang=ALL-UNNAMED`
 4. Run the server!
