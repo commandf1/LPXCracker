@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx.util;
 
-import it.ytnoos.lpx.u;
+import it.ytnoos.lpx.sr;
 import space.commandf1.cracker.lpx.LPXCrackerPlugin;
 
 import java.lang.reflect.Method;
@@ -26,18 +26,18 @@ public class CrackerUtil {
      * B:
      * */
     public static void executeFinishVerification(Object lpx) {
-        if (!(lpx instanceof u)) {
+        if (!(lpx instanceof sr)) {
             return;
         }
 
-        u u =  (u) lpx;
+        sr sr =  (sr) lpx;
 
         try {
             Class<?> aClass = Class.forName("it.ytnoos.lpx.q");
             Object o = aClass.newInstance();
-            Method declaredMethod = aClass.getDeclaredMethod("q", u.class);
+            Method declaredMethod = aClass.getDeclaredMethod("q", sr.class);
             declaredMethod.setAccessible(true);
-            declaredMethod.invoke(o, u);
+            declaredMethod.invoke(o, sr);
             LPXCrackerPlugin.getInstance().getLogger().info("Successfully hooked into Finish Verification method.");
         } catch (Exception e) {
             throw new RuntimeException(e);

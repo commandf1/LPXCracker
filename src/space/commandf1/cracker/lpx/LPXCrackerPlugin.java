@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.I2;
+import it.ytnoos.lpx.A;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.objectweb.asm.*;
@@ -8,7 +8,7 @@ import space.commandf1.cracker.lpx.util.ClassUtil;
 
 import java.util.Arrays;
 
-public class LPXCrackerPlugin extends I2 {
+public class LPXCrackerPlugin extends A {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
@@ -22,7 +22,9 @@ public class LPXCrackerPlugin extends I2 {
 
     @Override
     public void onEnable() {
-        this.getLogger().info("LPX v3.6.7 was cracked by commandf1");
+        String version = this.getDescription().getVersion();
+
+        this.getLogger().info("LPX v" + version + " was cracked by commandf1");
         this.getLogger().info("ENJOY!");
         try {
             modify(this.getClassLoader());
@@ -37,7 +39,7 @@ public class LPXCrackerPlugin extends I2 {
         lpxCommand.setTabCompleter(lpxCommand.getTabCompleter());
         lpxCommand.setExecutor((commandSender, command, s, strings) -> {
             if (strings.length == 0) {
-                commandSender.sendMessage("This server is running a NULLED version of LPX v3.6.7");
+                commandSender.sendMessage("This server is running a NULLED version of LPX v" + version);
                 commandSender.sendMessage("Cracked By commandf1 (QQ: 985248257 | Discord: commandf1)");
                 commandSender.sendMessage("Download LPX cracked: https://github.com/commandf1/LPXCracker.git");
             }

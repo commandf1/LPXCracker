@@ -499,7 +499,7 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending suspicious packets.'
       options:
-        max: 15000
+        max: 30000
     d:
       enabled: true
       punish: true
