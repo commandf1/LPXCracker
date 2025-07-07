@@ -1,8 +1,10 @@
 package space.commandf1.cracker.lpx.util;
 
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
@@ -48,13 +50,18 @@ public class ClassUtil {
 
     public static byte[] getClassBytes(String path, Class<?> clazz) throws Exception {
         URL jarUrl = clazz.getProtectionDomain().getCodeSource().getLocation();
-        try (JarFile jar = new JarFile(jarUrl.getFile().replace("%5B", "[").replace("%5D", "]"))) {
-            JarEntry entry = jar.getJarEntry(path);
-            if (entry != null) {
-                try (InputStream is = jar.getInputStream(entry)) {
-                    return StreamUtil.readAllBytesManual(is);
+        try {
+            File jarFile = new File(jarUrl.toURI());
+            try (JarFile jar = new JarFile(jarFile)) {
+                JarEntry entry = jar.getJarEntry(path);
+                if (entry != null) {
+                    try (InputStream is = jar.getInputStream(entry)) {
+                        return StreamUtil.readAllBytesManual(is);
+                    }
                 }
             }
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Failed to convert URL to URI: " + jarUrl, e);
         }
         return null;
     }
