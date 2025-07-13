@@ -45,6 +45,7 @@ options:
 
   # LPX will prevent any type of item exploit that slows Netty threads.
   # Available options:
+  # CREATIVE (disable decoding for every tiem and for creative mode)
   # ALL (disable decoding for every item) (DEFAULT) (can cause item ghosting)
   # SMART (disable decoding in a smart way)
   # NONE (vanilla behavior)
@@ -296,10 +297,20 @@ checks:
       max-vl: 2
       min-vl: 1
       punish-commands:
-        - 'lpx kick %player% &cYou are sending too many packets. :o'
+        - 'lpx kick %player% &cYou are sending suspicious packets.'
       options:
         countThreshold: 768
         max-depth: 64
+    j:
+      enabled: true
+      punish: true
+      max-vl: 2
+      min-vl: 1
+      punish-commands:
+        - 'lpx kick %player% &cYou are sending suspicious packets.'
+      options:
+        max-list: 12
+        max-array: 12
   creative:
     a:
       enabled: true

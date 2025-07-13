@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.A;
+import it.ytnoos.lpx.Ui;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.objectweb.asm.*;
@@ -8,7 +8,7 @@ import space.commandf1.cracker.lpx.util.ClassUtil;
 
 import java.util.Arrays;
 
-public class LPXCrackerPlugin extends A {
+public class LPXCrackerPlugin extends Ui {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
