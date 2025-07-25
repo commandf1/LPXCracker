@@ -3,7 +3,7 @@ main: space.commandf1.cracker.lpx.LPXCrackerPlugin
 authors:
   - Ytnoos
   - commandf1
-version: 3.6.10
+version: 3.6.12
 api-version: 1.13
 description: Blazingly stable anti exploit 1.8-1.21 but cracked
 softdepend:
