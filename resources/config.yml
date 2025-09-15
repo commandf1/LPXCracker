@@ -51,6 +51,12 @@ options:
   # NONE (vanilla behavior)
   disable-item-decoding: SMART
 
+  # Maximum depth an ItemStack can have per packet
+  max-item-depth: 4
+
+  # Maximum number of items a packet can contain
+  max-items-per-packet: 1458
+
   # LPX will prevent any type of component exploit that slows Netty threads
   skip-component-decoding: true
 
@@ -142,6 +148,19 @@ packet-logger:
   heavy-packet-threshold: 5000000
 
   enabled: false
+
+  # Where to save the logs. It can be CONSOLE, FILE or BOTH
+  output: FILE
+
+  # Netty watchdog thread
+  netty-watchdog:
+    enabled: true
+    # Max time (in milliseconds) a Netty thread can be be blocked before being dumped
+    max-time: 50
+    # Delay between thread health checks (in milliseconds)
+    check-frequency: 25
+    # Time to wait before dumping the thread again (in milliseconds)
+    report-cooldown: 5000
 
   # MODES: whitelist, blacklist
   # Whitelist mode: only players in the list will be logged

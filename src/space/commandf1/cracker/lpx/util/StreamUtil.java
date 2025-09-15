@@ -4,6 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author commandf1
+ */
 public class StreamUtil {
     public static byte[] readAllBytesManual(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

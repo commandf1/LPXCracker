@@ -1,11 +1,15 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.g;
+import it.ytnoos.lpx.Sf;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
+import space.commandf1.cracker.lpx.util.Metrics;
 
-public class LPXCrackerPlugin extends g {
+/**
+ * @author commandf1
+ */
+public class LPXCrackerPlugin extends Sf {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
@@ -19,6 +23,8 @@ public class LPXCrackerPlugin extends g {
 
     @Override
     public void onEnable() {
+        new Metrics(this, 27278);
+
         String version = this.getDescription().getVersion();
 
         this.getLogger().info("LPX v" + version + " was cracked by commandf1");

@@ -12,6 +12,9 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+/**
+ * @author commandf1
+ */
 public class ClassUtil {
     private static final Object CLASS_LOADING_LOCK = new Object();
 

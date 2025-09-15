@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 
 /**
  * Don't delete this class, you idiot.
+ *
+ * @author commandf1
  * */
 @SuppressWarnings("unused")
 public class CrackerUtil {
@@ -33,7 +35,7 @@ public class CrackerUtil {
 
         try {
             Class<?> aClass = Class.forName("it.ytnoos.lpx.q");
-            Object o = aClass.newInstance();
+            Object o = aClass.getDeclaredConstructor().newInstance();
             Method declaredMethod = aClass.getDeclaredMethod("q", lpx.getClass());
             declaredMethod.setAccessible(true);
             declaredMethod.invoke(o, lpx);
