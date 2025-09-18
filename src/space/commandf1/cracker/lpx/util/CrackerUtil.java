@@ -3,6 +3,9 @@ package space.commandf1.cracker.lpx.util;
 import it.ytnoos.lpx.api.LPX;
 import space.commandf1.cracker.lpx.LPXCrackerPlugin;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -38,10 +41,22 @@ public class CrackerUtil {
             Object o = aClass.getDeclaredConstructor().newInstance();
             Method declaredMethod = aClass.getDeclaredMethod("q", lpx.getClass());
             declaredMethod.setAccessible(true);
-            declaredMethod.invoke(o, lpx);
+            MethodHandle methodHandle = MethodHandles.lookup().unreflect(declaredMethod);
+            methodHandle.invoke(o, lpx);
             LPXCrackerPlugin.getInstance().getLogger().info("Successfully hooked into Finish Verification method.");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Required class not found: it.ytnoos.lpx.q", e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Required method 'q' not found in class it.ytnoos.lpx.q", e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException("Failed to instantiate class it.ytnoos.lpx.q", e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Access denied when invoking method", e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException("Exception occurred during method invocation", e.getCause());
+        } catch (Throwable e) {
+            throw new RuntimeException("Unexpected error during finish verification execution", e);
         }
     }
+
 }
