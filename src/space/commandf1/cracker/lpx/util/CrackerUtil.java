@@ -3,8 +3,8 @@ package space.commandf1.cracker.lpx.util;
 import it.ytnoos.lpx.api.LPX;
 import space.commandf1.cracker.lpx.LPXCrackerPlugin;
 
-import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -30,6 +30,7 @@ public class CrackerUtil {
      * IRETURN
      * B:
      * */
+    // @SuppressWarnings("JavaReflectionMemberAccess")
     @SuppressWarnings("JavaReflectionMemberAccess")
     public static void executeFinishVerification(Object lpx) {
         if (!(lpx instanceof LPX)) {
@@ -37,12 +38,15 @@ public class CrackerUtil {
         }
 
         try {
-            Class<?> aClass = Class.forName("it.ytnoos.lpx.q");
-            Object o = aClass.getDeclaredConstructor().newInstance();
-            Method declaredMethod = aClass.getDeclaredMethod("q", lpx.getClass());
-            declaredMethod.setAccessible(true);
-            MethodHandle methodHandle = MethodHandles.lookup().unreflect(declaredMethod);
-            methodHandle.invoke(o, lpx);
+            Class<?> afterVerificationSetupClass = Class.forName("it.ytnoos.lpx.q");
+            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            Object afterVerificationSetupClassObject = lookup
+                    .findConstructor(afterVerificationSetupClass, MethodType.methodType(void.class))
+                    .invoke();
+            Method afterVerificationSetupClassMethod = afterVerificationSetupClass.getDeclaredMethod("q", lpx.getClass());
+            afterVerificationSetupClassMethod.setAccessible(true);
+            lookup.unreflect(afterVerificationSetupClassMethod)
+                    .invoke(afterVerificationSetupClassObject, lpx);
             LPXCrackerPlugin.getInstance().getLogger().info("Successfully hooked into Finish Verification method.");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Required class not found: it.ytnoos.lpx.q", e);
