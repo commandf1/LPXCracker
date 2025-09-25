@@ -152,9 +152,9 @@ packet-logger:
   # Where to save the logs. It can be CONSOLE, FILE or BOTH
   output: FILE
 
-  # Netty watchdog thread
+  # Netty watchdog thread. Enable it only for debug using /lpx watchdog
+  # Do not use this in production because it may cause TPS drops
   netty-watchdog:
-    enabled: true
     # Max time (in milliseconds) a Netty thread can be be blocked before being dumped
     max-time: 50
     # Delay between thread health checks (in milliseconds)
