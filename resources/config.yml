@@ -184,6 +184,7 @@ packet-logger:
     - KEEP_ALIVE
     - ANIMATION
     - WINDOW_CONFIRMATION
+    - CLIENT_TICK_END
 
 checks:
   netty:
@@ -259,7 +260,7 @@ checks:
         max: 50
         max-modern: 100
     c:
-      enabled: true
+      enabled: false
       punish: true
       max-vl: 3
       min-vl: 1
@@ -473,11 +474,11 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending too many packets. :o'
       options:
-        max: 15
+        max: 20
         reset-interval: 100
         max-periods: 6
         max-warnings: 3
-        big-threshold: 4096
+        big-threshold: 6000
     d:
       enabled: true
       punish: true
@@ -486,8 +487,8 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending too many packets. o:'
       options:
-        max: 10
-        big-threshold: 2048
+        max: 13
+        big-threshold: 4000
         max-big: 6
     f:
       enabled: true
@@ -498,6 +499,17 @@ checks:
         - 'lpx kick %player% &cYou are sending too many packets. :$'
       options:
         max: 8
+    g:
+      enabled: true
+      punish: true
+      max-vl: 3
+      min-vl: 2
+      punish-commands:
+        - 'lpx kick %player% &cYou are sending too many packets. :&'
+      options:
+        max: 70
+        interval: 500
+        cancel: true
   position:
     a:
       enabled: true
@@ -512,7 +524,7 @@ checks:
       max-vl: 6
       min-vl: 1
       buffer:
-        max: 2
+        max: 5
         multiply: 0.5
         decay: 0.05
       punish-commands:
@@ -529,7 +541,7 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending suspicious packets.'
       options:
-        max: 30000
+        max: 300000
     d:
       enabled: true
       punish: true
@@ -538,7 +550,7 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending suspicious packets.'
       options:
-        max: 100000
+        max: 1000000
   payload:
     a:
       enabled: true

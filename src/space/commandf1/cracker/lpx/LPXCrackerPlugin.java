@@ -4,12 +4,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
 import space.commandf1.cracker.lpx.util.Metrics;
-import it.ytnoos.lpx.q1;
+import it.ytnoos.lpx.GE;
 
 /**
  * @author commandf1
  */
-public class LPXCrackerPlugin extends q1 {
+public class LPXCrackerPlugin extends GE {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
