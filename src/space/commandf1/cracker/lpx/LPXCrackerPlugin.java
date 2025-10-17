@@ -1,15 +1,15 @@
 package space.commandf1.cracker.lpx;
 
+import it.ytnoos.lpx.Y;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
 import space.commandf1.cracker.lpx.util.Metrics;
-import it.ytnoos.lpx.GE;
 
 /**
  * @author commandf1
  */
-public class LPXCrackerPlugin extends GE {
+public class LPXCrackerPlugin extends Y {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {

@@ -501,7 +501,7 @@ checks:
         max: 8
     g:
       enabled: true
-      punish: true
+      punish: false
       max-vl: 3
       min-vl: 2
       punish-commands:
