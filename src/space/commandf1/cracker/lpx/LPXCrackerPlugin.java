@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.Y;
+import it.ytnoos.lpx.O;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
@@ -9,7 +9,7 @@ import space.commandf1.cracker.lpx.util.Metrics;
 /**
  * @author commandf1
  */
-public class LPXCrackerPlugin extends Y {
+public class LPXCrackerPlugin extends O {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
@@ -44,7 +44,7 @@ public class LPXCrackerPlugin extends Y {
         lpxCommand.setExecutor((commandSender, command, s, strings) -> {
             if (strings.length == 0) {
                 commandSender.sendMessage("This server is running a NULLED version of LPX v" + version);
-                commandSender.sendMessage("Cracked By commandf1 (QQ: 985248257 | Discord: commandf1)");
+                commandSender.sendMessage("Cracked By commandf1 (Discord: commandf1#4399)");
                 commandSender.sendMessage("Download LPX cracked: https://github.com/commandf1/LPXCracker.git");
             }
 
