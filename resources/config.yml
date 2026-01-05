@@ -51,6 +51,14 @@ options:
   # NONE (vanilla behavior)
   disable-item-decoding: SMART
 
+  # Used only if "disable-item-decoding" is set to CREATIVE.
+  # The components listed below will still be decoded in creative mode.
+  # https://github.com/retrooper/packetevents/blob/2.0/api/src/main/java/com/github/retrooper/packetevents/protocol/component/ComponentTypes.java
+  creative-exempts:
+    - "custom_name"
+    - "lore"
+    - "enchantments"
+
   # Maximum depth an ItemStack can have per packet
   max-item-depth: 4
 
@@ -501,15 +509,17 @@ checks:
         max: 8
     g:
       enabled: true
-      punish: false
-      max-vl: 3
-      min-vl: 2
+      punish: true
+      max-vl: 2
+      min-vl: 1
       punish-commands:
         - 'lpx kick %player% &cYou are sending too many packets. :&'
       options:
         max: 70
         interval: 500
         cancel: true
+        burst-max-flags: 2
+        burst-interval: 1200
   position:
     a:
       enabled: true

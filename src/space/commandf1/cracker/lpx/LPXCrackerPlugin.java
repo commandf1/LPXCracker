@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.O;
+import it.ytnoos.lpx.FC;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
@@ -9,7 +9,7 @@ import space.commandf1.cracker.lpx.util.Metrics;
 /**
  * @author commandf1
  */
-public class LPXCrackerPlugin extends O {
+public class LPXCrackerPlugin extends FC {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
@@ -50,16 +50,6 @@ public class LPXCrackerPlugin extends O {
 
             return executor.onCommand(commandSender, command, s, strings);
         });
-    }
-
-    @Override
-    public void onDisable() {
-        super.onDisable();
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
     }
 
     private static void modify(ClassLoader classLoader) throws Exception {
