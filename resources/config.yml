@@ -65,9 +65,6 @@ options:
   # Maximum number of items a packet can contain
   max-items-per-packet: 1458
 
-  # LPX will prevent any type of component exploit that slows Netty threads
-  skip-component-decoding: true
-
   # If this option is set to true, players won't be able to see the output of /lpx
   hidden-command: false
 
@@ -136,6 +133,21 @@ options:
 
   debug: false
 
+  # Whether cancelled packets should be logged to the alerts file
+  log-cancelled-packets: true
+
+  # BETA | Strips selected components/nbts sent from the server to the client
+  item-strip:
+    enabled: false
+    # Also strip items in SET_SLOT packets (by default only WINDOW_ITEMS is checked)
+    set-slot: false
+    # Components to remove when stripping (for 1.20.5+ servers)
+    remove-components:
+      - "container"
+    # NBT tags to remove when stripping (for pre-1.20.5 servers)
+    remove-nbt:
+      - "BlockEntityTag"
+
   # If set to true LPX will look for the config.yml in ../config/config.yml
   external-config: false
 
@@ -154,6 +166,11 @@ packet-logger:
   # If a packet requires more than this amount of time (in nanoseconds) to be processed, it will be logged
   # Example: 5000000ns = 5ms, -1 to disable
   heavy-packet-threshold: 5000000
+
+  # Packet types in this list will be ignored for heavy packet threshold logging
+  # To find out correct names, https://github.com/retrooper/packetevents/blob/2.0/api/src/main/java/com/github/retrooper/packetevents/protocol/packettype/PacketType.java#L510
+  heavy-ignored-packets:
+    - PONG
 
   enabled: false
 
@@ -318,7 +335,8 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending suspicious packets.'
       options:
-        clear: true
+        max-translate: 1
+        max-keybind: 1
     i:
       enabled: true
       punish: true
@@ -456,24 +474,99 @@ checks:
       punish-commands:
         - 'lpx kick %player% &cYou are sending too many packets. >:'
       options:
-        # The following strings are represented by 2 or 3 parameters:
-        # PacketName | Max packets | Interval(ms) | Periods | Warnings
-        # "ANIMATION,50,500,5,2" Means this check will flag when a player sends 50 ANIMATION packets in an interval of 500ms for 2 times in a period of (5*500ms)
+        # Each packet type can have: max, interval (ms), periods, warnings, action (flag/drop)
+        # "drop" cancels the packet when the limit is exceeded, "flag" only alerts
+        # You can define multiple limits for the same packet type using a list
         limits:
-          - "ANIMATION,50,500,5,2"
-          - "USE_ITEM,60,1000,5,2"
-          - "PLAYER_BLOCK_PLACEMENT,14,100,6,3"
-          - "CLICK_WINDOW,20,200,10,4"
-          - "CREATIVE_INVENTORY_ACTION,20,200,10,4"
-          - "PLAYER_POSITION,40,100,5,3"
-          - "PLAYER_ROTATION,40,100,5,3"
-          - "PLAYER_POSITION_AND_ROTATION,40,100,5,3"
-          - "CRAFT_RECIPE_REQUEST,15,1000,2,1"
-          - "TAB_COMPLETE,40,1000,2,1"
-          - "INTERACT_ENTITY,25,500,5,3"
-          - "CHAT_COMMAND,5,500,5,2"
-          - "PLAYER_DIGGING,40,500,6,3"
-          - "UPDATE_SIGN,2,300,6,2"
+          ANIMATION:
+            max: 50
+            interval: 500
+            periods: 5
+            warnings: 2
+            action: flag
+          USE_ITEM:
+            max: 60
+            interval: 1000
+            periods: 5
+            warnings: 2
+            action: flag
+          PLAYER_BLOCK_PLACEMENT:
+            max: 14
+            interval: 100
+            periods: 6
+            warnings: 3
+            action: flag
+          CLICK_WINDOW:
+            - max: 20
+              interval: 200
+              periods: 10
+              warnings: 4
+              action: drop
+            - max: 5
+              interval: 80
+              periods: 6
+              warnings: 3
+              action: flag
+          CREATIVE_INVENTORY_ACTION:
+            - max: 20
+              interval: 200
+              periods: 10
+              warnings: 4
+              action: drop
+          PLAYER_POSITION:
+            max: 40
+            interval: 100
+            periods: 5
+            warnings: 3
+            action: flag
+          PLAYER_ROTATION:
+            max: 40
+            interval: 100
+            periods: 5
+            warnings: 3
+            action: flag
+          PLAYER_POSITION_AND_ROTATION:
+            max: 40
+            interval: 100
+            periods: 5
+            warnings: 3
+            action: flag
+          CRAFT_RECIPE_REQUEST:
+            max: 15
+            interval: 1000
+            periods: 2
+            warnings: 1
+            action: flag
+          TAB_COMPLETE:
+            max: 10
+            interval: 50
+            periods: 6
+            warnings: 3
+            action: flag
+          INTERACT_ENTITY:
+            max: 25
+            interval: 500
+            periods: 5
+            warnings: 3
+            action: flag
+          CHAT_COMMAND:
+            max: 5
+            interval: 500
+            periods: 5
+            warnings: 2
+            action: flag
+          PLAYER_DIGGING:
+            max: 40
+            interval: 500
+            periods: 6
+            warnings: 3
+            action: flag
+          UPDATE_SIGN:
+            max: 2
+            interval: 300
+            periods: 6
+            warnings: 2
+            action: drop
     c:
       enabled: true
       punish: true
@@ -516,10 +609,10 @@ checks:
         - 'lpx kick %player% &cYou are sending too many packets. :&'
       options:
         max: 70
-        interval: 500
+        interval: 250
+        periods: 5
+        warnings: 2
         cancel: true
-        burst-max-flags: 2
-        burst-interval: 1200
   position:
     a:
       enabled: true
