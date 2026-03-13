@@ -17,8 +17,8 @@ import java.lang.reflect.Method;
 public class CrackerUtil {
 
     /**
-     * IDK why but the author likes to add another verification for the plugin
-     * Should be executed by method Ò²Ð… at it.ytnoos.lpx.z
+     * There's an anticracker existing
+     * This should be executed by method Ò²Ð… at it.ytnoos.lpx.z
      * <p>
      * CODE SHOULD BE:
      * DEFINE PRIVATE Ò²Ð…([Ljava/lang/Object; a1)Z
