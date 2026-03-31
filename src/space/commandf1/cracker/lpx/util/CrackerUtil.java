@@ -17,14 +17,14 @@ import java.lang.reflect.Method;
 public class CrackerUtil {
 
     /**
-     * IDK why but the author likes to add another verification for the plugin
-     * Should be executed by method Ò²Ð… at it.ytnoos.lpx.z
+     * LOL ytnoos has changed the obfuscation of it.ytnoos.lpx.z
+     * This method should be executed by method ҲЅ at it.ytnoos.lpx.z
      * <p>
-     * CODE SHOULD BE:
-     * DEFINE PRIVATE Ò²Ð…([Ljava/lang/Object; a1)Z
+     * CODE SHOULD BE LIKE:
+     * DEFINE PRIVATE ҲЅ([Ljava/lang/Object; a1)Z
      * A:
      * ALOAD this
-     * GETFIELD it/ytnoos/lpx/z.Ï  Lit/ytnoos/lpx/api/LPX;
+     * GETFIELD it/ytnoos/lpx/z.Ϡ Lit/ytnoos/lpx/api/LPX;
      * INVOKESTATIC space/commandf1/cracker/lpx/util/CrackerUtil.executeFinishVerification(Ljava.lang.Object;)V
      * ICONST_1
      * IRETURN

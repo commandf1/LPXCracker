@@ -1,6 +1,6 @@
 package space.commandf1.cracker.lpx;
 
-import it.ytnoos.lpx.AD;
+import it.ytnoos.lpx.O;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import space.commandf1.cracker.lpx.util.ClassUtil;
@@ -9,7 +9,7 @@ import space.commandf1.cracker.lpx.util.Metrics;
 /**
  * @author commandf1
  */
-public class LPXCrackerPlugin extends AD {
+public class LPXCrackerPlugin extends O {
     private static LPXCrackerPlugin instance;
 
     public LPXCrackerPlugin() {
@@ -63,10 +63,10 @@ public class LPXCrackerPlugin extends AD {
         }
 
         byte[] bytes = ClassUtil.modifyClass(classBytes,
-                "Ò²Ð…",
+                "ҲЅ",
                 "([Ljava/lang/Object;)Z",
                 "it/ytnoos/lpx/z",
-                "Ï ",
+                "Ϡ",
                 "Lit/ytnoos/lpx/api/LPX;",
                 "space/commandf1/cracker/lpx/util/CrackerUtil",
                 "executeFinishVerification",
